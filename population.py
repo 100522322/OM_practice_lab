@@ -24,5 +24,5 @@ class Population:
         """
         From a random sample of size: t_size, returns the best Individual
         """
-        indiv = random.sample(self.individuals, t_size)
-        return min(indiv)
+        ind_sample = random.sample(self.individuals, t_size)
+        return min(ind_sample)
