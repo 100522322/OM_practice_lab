@@ -1,27 +1,32 @@
-fp = "instances/tai20_5_0.fsp"
+import random
 
-with open(fp, 'r') as f:
-    lines = [line.strip() for line in f if line.strip()]
 
-p_times = []
-for i, line in enumerate(lines):
-    tokens = line.split()
+p1_seq = [1,2,3,4,5,6,7,8,9]
+p2_seq = [5,7,4,9,1,3,6,2,8]
+size = len(p1_seq)
 
-    print(line)
-    # Cheks the Jobs and Machines lines
-    if i==1 and len(tokens) >= 2 and tokens[0].isdigit() and tokens[1].isdigit():
-        j, m = int(tokens[0]), int(tokens[1])
+# Pick 2 cut points
+idx1, idx2 = 2, 5
 
-        seed = int(tokens[2]) if tokens[2].isdigit() else None
-        upper = int(tokens[3]) if tokens[3].isdigit() else None
-        lower = int(tokens[4]) if tokens[4].isdigit() else None
-    
-    if i>=3:
-        tokens = line.split()
-        p_times.append([int(t) for t in tokens])
-    
+# Copy segment from parent1
+offspring_seq = [None] * size
+segment = p1_seq[idx1:idx2+1]
 
-print("-------------------")
-print(len(p_times))
-print(len(p_times[0]))
-print(type(p_times[0][0]))
+offspring_seq[idx1:idx2+1] = segment
+segment_set = set(segment) 
+
+
+# Fill rest from parent2 in order, skipping duplicates
+p2_pointer = 0
+for i in range(size):
+    if idx1 <= i <= idx2:
+        continue
+        
+    # See if it was already in
+    while p2_seq[p2_pointer] in segment_set:
+        p2_pointer += 1
+        
+    offspring_seq[i] = p2_seq[p2_pointer]
+    p2_pointer += 1
+
+print(offspring_seq)
