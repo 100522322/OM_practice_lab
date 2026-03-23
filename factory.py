@@ -38,9 +38,9 @@ class Factory:
 
                 if pos == 0 and m == 0:
                     completion[m][pos] = process
-                if pos == 0 and m != 0:
+                elif pos == 0 and m != 0:
                     completion[m][pos] = completion[m-1][pos] + process
-                if pos != 0 and m ==0:
+                elif pos != 0 and m ==0:
                     completion[m][pos] = completion[m][pos-1] + process
                 else:
                     completion[m][pos] = max(completion[m-1][pos], completion[m][pos-1]) + process
@@ -83,7 +83,7 @@ class Factory:
             # Checks the processing times and saves them
             if i>=3:
                 tokens = line.split()
-                p_times.append(tokens)
+                p_times.append([int(t) for t in tokens])
         
 
         self.n_jobs = j
@@ -95,7 +95,7 @@ class Factory:
 
     def __str__(self):
         s = "number of jobs, number of machines, initial seed, upper bound and lower bound :\n" \
-            f"{self.n_jobs}\t{self.n_machines}\t{self.seed}\t{self.upper_bound}\t{self.lower_bound}" \
+            f"{self.n_jobs}\t{self.n_machines}\t{self.seed}\t{self.upper_bound}\t{self.lower_bound}\n" \
             "Processing Times:\n"
         
         for m in self.p_times:

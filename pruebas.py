@@ -18,9 +18,10 @@ for i, line in enumerate(lines):
     
     if i>=3:
         tokens = line.split()
-        p_times.append(tokens)
+        p_times.append([int(t) for t in tokens])
     
 
 print("-------------------")
 print(len(p_times))
 print(len(p_times[0]))
+print(type(p_times[0][0]))
