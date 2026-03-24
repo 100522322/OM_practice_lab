@@ -44,7 +44,7 @@ class EA:
 
                     # If it complies a crossover is performed
                     if random.random() < self.px:
-                        child = op.ox(ind1, ind2)
+                        child = op.pmx(ind1, ind2)
                     else:
                         child = ind1.copy()
                     

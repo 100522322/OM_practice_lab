@@ -83,8 +83,43 @@ class Operators:
         return offspring
 
     @staticmethod
-    def pmx():
-        pass
+    def pmx(p1: Individual, p2: Individual) -> Individual:
+        """
+        Partially Matched Crossover
+        """
+        p1_seq = p1.sequence
+        p2_seq = p2.sequence
+        size = len(p1_seq)
+
+        # Picks 2 cut points
+        idx1, idx2 = sorted(random.sample(range(size), 2))
+
+        # maps the values of p1 into p2 segement values
+        mapping = {}
+        for a, b in zip(p1_seq[idx1:idx2+1], p2_seq[idx1:idx2+1]):
+            mapping[a] = b
+        
+        # Makes a copy of p2_seq
+        o1_seq = p2_seq[:]
+        # Insert p1 segment into it
+        o1_seq[idx1:idx2+1] = p1_seq[idx1:idx2+1]
+
+        # Replace the duplicates
+        for i in range(size):
+            if idx1 <= i <= idx2:
+                continue
+            
+            val = o1_seq[i]
+            while val in p1_seq[idx1:idx2+1]:
+                val = mapping[val]
+            
+            o1_seq[i] = val
+
+        # Creates the individual
+        o1 = p1.copy()
+        o1.sequence = o1_seq
+        o1.fitness = None
+        return o1
 
     @staticmethod
     def cx():

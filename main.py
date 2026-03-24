@@ -32,7 +32,8 @@ ea = EA(
 
 rs = RandomSearch(
     factory=factory,
-    n_evaluations=n_eval
+    n_evaluations=n_eval,
+    pop_size=pop_size
 )
 
 greedy = Greedy(
