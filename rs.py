@@ -13,8 +13,10 @@ class RandomSearch:
         jobs = fact.n_jobs
         
         with open(f"data/RS_{fact.name}.csv", "w") as f:
-            f.write("generation,best,actual\n")
+            f.write("generation,best,actual,worst\n")
 
+            worst_fitness = 0
+            # Try randomly to find the best solution
             for i in range(self.n_evaluations):
                 ind = Individual.random(jobs)
                 ind.evaluate(fact)
@@ -22,6 +24,9 @@ class RandomSearch:
                 if self.best_indiv is None or ind.fitness < self.best_indiv.fitness:
                     self.best_indiv = ind
                 
-                f.write(f"{i},{self.best_indiv.fitness},{ind.fitness}\n")
+                if worst_fitness < ind.fitness:
+                    worst_fitness = ind.fitness
+                
+                f.write(f"{i},{self.best_indiv.fitness},{ind.fitness},{worst_fitness}\n")
         
         return self.best_indiv

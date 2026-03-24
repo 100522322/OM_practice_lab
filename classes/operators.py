@@ -4,7 +4,7 @@ from classes.individual import Individual
 class Operators:
     
     @staticmethod
-    def swap(individual: Individual):
+    def swap(individual: Individual, i1=None, i2=None) -> Individual:
         """
         select randomly 2 indexes, Swap their position
         """
@@ -12,7 +12,10 @@ class Operators:
         seq = ind.sequence
         
         # Selects 2 random indexes
-        idx1, idx2 = random.sample(range(len(seq)), 2)
+        if i1 is None or i2 is None:
+            idx1, idx2 = random.sample(range(len(seq)), 2)
+        else:
+            idx1, idx2 = i1, i2
         # changes the values on those indexes
         seq[idx1], seq[idx2] = seq[idx2], seq[idx1]
 
@@ -21,7 +24,7 @@ class Operators:
         return ind
     
     @staticmethod
-    def inversion(individual: Individual):
+    def inversion(individual: Individual) -> Individual:
         """
         Select randomly 2 indexes, then inverses the sequence between them
         """
@@ -38,7 +41,7 @@ class Operators:
         return ind
     
     @staticmethod
-    def ox(parent1: Individual, parent2: Individual):
+    def ox(parent1: Individual, parent2: Individual) -> Individual:
         """
         Ordered Crossover
         Select random segment of P1
