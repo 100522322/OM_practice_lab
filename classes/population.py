@@ -1,4 +1,4 @@
-from individual import Individual
+from classes.individual import Individual
 import random
 
 class Population:

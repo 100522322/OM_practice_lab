@@ -1,8 +1,8 @@
 import random
-from factory import Factory
-from population import Population
-from individual import Individual
-from operators import Operators as op
+from classes.factory import Factory
+from classes.population import Population
+from classes.individual import Individual
+from classes.operators import Operators as op
 
 class EA:
 
@@ -29,7 +29,7 @@ class EA:
         self.best_indiv = self.population.best_individual
 
         # Opens a file and writes the data of the running on it
-        with open(f"data/{factory.name}.csv", "w") as f:
+        with open(f"data/EA_{factory.name}.csv", "w") as f:
             f.write("generation,best,avg,worst\n")
 
             # Start a loop for performing all the generations

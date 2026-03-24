@@ -1,5 +1,5 @@
 import random
-from individual import Individual
+from classes.individual import Individual
 
 class Operators:
     

@@ -1,4 +1,4 @@
-from factory import Factory
+from classes.factory import Factory
 import random
 
 class Individual:
